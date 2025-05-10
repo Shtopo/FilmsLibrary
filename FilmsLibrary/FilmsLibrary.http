@@ -1,0 +1,6 @@
+@FilmsLibrary_HostAddress = http://localhost:5110
+
+GET {{FilmsLibrary_HostAddress}}/films/test
+Accept: application/json
+
+###
