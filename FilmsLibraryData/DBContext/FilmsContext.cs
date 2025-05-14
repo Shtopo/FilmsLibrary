@@ -1,5 +1,6 @@
 ﻿using FilmsLibraryData.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace FilmsLibraryData.DBContext
 {
@@ -24,7 +25,9 @@ namespace FilmsLibraryData.DBContext
             {
                 f.HasMany(f => f.Countries).WithMany();
                 f.HasMany(f => f.Genres).WithMany();
-                f.HasOne(f => f.Director).WithMany();
+                f.HasOne(f => f.Director)
+                    .WithMany()
+                    .HasForeignKey(f => f.DirectorId);
                 f.HasMany(f => f.Actors).WithMany(a => a.Films);
                 f.HasMany(f => f.Rating).WithOne(fb => fb.Film);
             });

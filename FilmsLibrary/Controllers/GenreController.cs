@@ -22,8 +22,9 @@ namespace FilmsLibrary.Controllers
             _genreService = genreService;
         }
 
-        [HttpPut("add")]
+        [HttpPut("AddGenre")]
         public async Task<IActionResult> AddGenre([FromQuery] string genreName)
+
         {
             var genreId = await _genreService.AddGenreAsync(genreName);
             return Ok(genreId);

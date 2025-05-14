@@ -30,10 +30,10 @@ namespace FilmsLibrary.Controllers
             return Ok(filmId);
         }
 
-        [HttpGet("findFilm")]
+        [HttpGet("findFilms")]
         public async Task<IActionResult> GetFilms()
         {
-            var films = await _filmService.GetFilmsAsync();    
+            var films = await _filmService.GetFilmsAsync();
 
             return Ok(films);
         }
@@ -49,6 +49,17 @@ namespace FilmsLibrary.Controllers
 
             return Ok(film);
         }
+
+        [HttpPut("assignDirector")]
+        public async Task<IActionResult> AssignDirector([FromQuery] int filmId, [FromQuery] int directorId)
+        {
+            var success = await _filmService.AssignDirectorAsync(filmId, directorId);
+            if (!success)
+                return NotFound("Film or Director not found");
+
+            return Ok("Director assigned to film.");
+        }
+
     }
 }
 
