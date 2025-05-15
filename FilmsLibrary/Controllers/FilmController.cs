@@ -55,9 +55,20 @@ namespace FilmsLibrary.Controllers
         {
             var success = await _filmService.AssignDirectorAsync(filmId, directorId);
             if (!success)
-                return NotFound("Film or Director not found");
+                return NotFound("Film or director not found");
 
             return Ok("Director assigned to film.");
+        }
+
+
+        [HttpPost("AddGanre")]
+        public async Task<IActionResult> AddFilmGenres([FromQuery] int filmId, [FromQuery] int genreId)
+        {               
+            var success = await _filmService.AssignGenreAsync(filmId, genreId);
+            if (!success)
+                return NotFound("Film or genre not found");
+
+            return Ok("Genre assigned to film.");
         }
 
     }

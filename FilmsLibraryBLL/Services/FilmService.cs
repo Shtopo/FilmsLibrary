@@ -112,5 +112,32 @@ namespace FilmsLibraryBLL.Services
             }
             return ratings.Select(f => f.Rating).Sum()/ratings.Count;
         }
+
+        public async Task<bool> AssignGenreAsync(int filmId, int genreId)
+        {
+            if(filmId == 0 || genreId == 0)
+            {
+                return false;
+            }
+
+            var film = await _context.Films.FirstOrDefaultAsync(f => f.Id == filmId);
+            var genre = await _context.Genres.FirstOrDefaultAsync(g => g.Id == genreId);
+
+            if(film == null || genre == null)
+            {
+                return false;
+            }
+
+            if(film.Genres == null)
+            {
+                film.Genres = new List<Genre>();
+            }
+
+            film.Genres.Add(genre);
+            
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

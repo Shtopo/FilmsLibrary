@@ -13,5 +13,6 @@ namespace FilmsLibraryBLL.Abstractions.Services
         Task<string> GetFilmsAsync();
         Task<Film> RenameFilmAsync(string filmName, string newName);
         Task<bool> AssignDirectorAsync(int filmId, int directorId);
+        Task<bool> AssignGenreAsync(int filmId, int genreId);
     }
 }
