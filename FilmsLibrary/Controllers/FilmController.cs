@@ -81,6 +81,16 @@ namespace FilmsLibrary.Controllers
             return Ok("Country assigned to film.");
         }
 
+        [HttpPost("AddActors")]
+        public async Task<IActionResult> AddFilmActors([FromQuery] int filmId, [FromQuery] int actorId)
+        {
+            var success = await _filmService.AssignActorsAsync(filmId, actorId);
+            if (!success)
+                return NotFound("Film or actor not found");
+
+            return Ok("Actor assigned to film.");
+        }
+
     }
 }
 

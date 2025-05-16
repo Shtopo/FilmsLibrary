@@ -16,5 +16,6 @@ namespace FilmsLibraryBLL.Abstractions.Services
         Task<bool> AssignDirectorAsync(int filmId, int directorId);
         Task<bool> AssignGenreAsync(int filmId, int genreId);
         Task<bool> AssignCountryAsync(int filmId, int countryId);
+        Task<bool> AssignActorsAsync(int filmId, int actorId);
     }
 }

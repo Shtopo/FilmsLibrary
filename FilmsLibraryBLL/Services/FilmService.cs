@@ -166,5 +166,32 @@ namespace FilmsLibraryBLL.Services
 
             return true;
         }
+
+        public async Task<bool> AssignActorsAsync(int filmId, int actorId)
+        {
+            if (filmId == 0 || actorId == 0)
+            {
+                return false;
+            }
+
+            var film = await _context.Films.FirstOrDefaultAsync(f => f.Id == filmId);
+            var actor = await _context.Persons.FirstOrDefaultAsync(p => p.Id == actorId);
+
+            if (film == null || actor == null)
+            {
+                return false;
+            }
+
+            if (film.Actors == null)
+            {
+                film.Actors = new List<Person>();
+            }
+
+            film.Actors.Add(actor);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }
