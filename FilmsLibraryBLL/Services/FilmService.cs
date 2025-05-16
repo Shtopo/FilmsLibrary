@@ -139,5 +139,32 @@ namespace FilmsLibraryBLL.Services
 
             return true;
         }
+
+        public async Task<bool> AssignCountryAsync(int filmId, int countryId)
+        {
+            if (filmId == 0 || countryId == 0)
+            {
+                return false;
+            }
+
+            var film = await _context.Films.FirstOrDefaultAsync(f => f.Id == filmId);
+            var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
+
+            if (film == null || country == null)
+            {
+                return false;
+            }
+
+            if (film.Countries == null)
+            {
+                film.Countries = new List<Country>();
+            }
+
+            film.Countries.Add(country);
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

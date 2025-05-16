@@ -1,4 +1,5 @@
-﻿using FilmsLibraryData.Entities;
+﻿using FilmsLibraryBLL.Services;
+using FilmsLibraryData.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace FilmsLibraryBLL.Abstractions.Services
         Task<Film> RenameFilmAsync(string filmName, string newName);
         Task<bool> AssignDirectorAsync(int filmId, int directorId);
         Task<bool> AssignGenreAsync(int filmId, int genreId);
+        Task<bool> AssignCountryAsync(int filmId, int countryId);
     }
 }
